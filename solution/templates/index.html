@@ -13,7 +13,7 @@
                     </div>
                     <div class="post-image-container">
                         <a href="{{ url_for('post_detail', post_id=post.id) }}">
-                            <img src="{{ post.image_filename|file_url }}" class="post-image" alt="{{ post.caption}}">
+                            <img src="{{ post.image_filename|file_url }}" class="post-image img-fluid" alt="{{ post.caption}}">
                         </a>
                     </div>
                     <div class="post-actions">
