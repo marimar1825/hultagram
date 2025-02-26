@@ -1,0 +1,85 @@
+body {
+    background-color: #fafafa;
+}
+
+}
+.navbar {
+    border-bottom: 1px solid #dbdbdb;
+    background-color: white;
+}
+
+.card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+}
+.post-username {
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.profile-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.post-image-container {
+    width: 100%;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 600px;
+}
+
+.post-actions {
+    padding: 10px 7px;
+    border-top: 1px solid #efefef;
+}
+
+.post-likes {
+    padding: 0 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.post-caption {
+    padding: 0 15px 15px;
+    margin-bottom: 5px;
+}
+
+.post-time {
+    padding: 0 15px 5px;
+    color: #8e8e8e;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.comment-form {
+    padding: 10px;
+    border-top: 1px solid #efefef;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
