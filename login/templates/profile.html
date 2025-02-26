@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <div class="profile-image-container">
+                            {% if user.profile_image == 'default.jpg' %}
+                                <div class="profile-icon-large">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                            {% else %}
+                                <img src="{{ url_for('static', filename='uploads/' + user.profile_image) }}" 
+                                     class="rounded-circle profile-image" alt="{{ user.username }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="d-flex align-items-center mb-3">
+                            <h4 class="mb-0">{{ user.username }}</h4>
+                            {% if 'user_id' in session and session['user_id'] == user.id %}
+                                <a href="{{ url_for('edit_profile') }}" class="btn btn-sm btn-outline-secondary ms-3">
+                                    Edit Profile
+                                </a>
+                            {% elif 'user_id' in session %}
+                                {% if is_following %}
+                                    <form action="{{ url_for('unfollow', username=user.username) }}" method="POST" class="ms-3">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Unfollow</button>
+                                    </form>
+                                {% else %}
+                                    <form action="{{ url_for('follow', username=user.username) }}" method="POST" class="ms-3">
+                                        <button type="submit" class="btn btn-sm btn-primary">Follow</button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="me-4"><strong>{{ posts|length }}</strong> posts</div>
+                            <div class="me-4"><strong>{{ follower_count }}</strong> followers</div>
+                            <div><strong>{{ following_count }}</strong> following</div>
+                        </div>
+                        <div>
+                            <p>{{ user.bio }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% if posts %}
+                {% for post in posts %}
+                    <div class="col-md-4 mb-4">
+                        <a href="{{ url_for('post_detail', post_id=post.id) }}" class="profile-post-link">
+                            <div class="profile-post-thumbnail">
+                                <img src="{{ post.image_filename|file_url }}" alt="{{ post.caption }}">
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center py-5">
+                    <i class="bi bi-camera" style="font-size: 3rem;"></i>
+                    <h4 class="mt-3">No Posts Yet</h4>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
