@@ -16,13 +16,13 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 
-# Make sure upload folder exists
+# Check that upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(os.path.join(app.config['UPLOAD_FOLDER'], 'profiles'), exist_ok=True)
 
 db = SQLAlchemy(app)
 
-# User Model
+# Create User Model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -82,14 +82,14 @@ class User(db.Model):
         if follow:
             db.session.delete(follow)
 
-# Follow Model (for user following relationship)
+# Create Follow Model (for user following relationship)
 class Follow(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     follower_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     followed_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# Like Model
+# Create Like Model
 class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -99,7 +99,7 @@ class Like(db.Model):
     # Add unique constraint to prevent multiple likes from same user
     __table_args__ = (db.UniqueConstraint('user_id', 'post_id'),)
 
-# Comment Model
+# Create Comment Model
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
@@ -122,7 +122,7 @@ class Comment(db.Model):
         else:
             return "just now"
 
-# Post Model
+# Create Post Model
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     image_filename = db.Column(db.String(100), nullable=False)
@@ -165,7 +165,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Helper function to check allowed file extensions
+# Check for allowed image file extensions
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
@@ -213,6 +213,7 @@ def register():
     
     return render_template('register.html')
 
+# Create a route for login 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -241,6 +242,7 @@ def logout():
     flash('You have been logged out', 'info')
     return redirect(url_for('index'))
 
+# Create a route for viewing a profile 
 @app.route('/profile/<username>')
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
