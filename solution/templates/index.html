@@ -19,11 +19,11 @@
                     <div class="post-actions">
                         <form action="{{ url_for('like_post', post_id=post.id) }}" method="POST" class="d-inline">
                             <button type="submit" class="btn btn-sm text-danger">
-                                <i class="bi bi-heart"></i>
+                                <i class="bi bi-heart fs-4"></i>
                             </button>
                         </form>
                         <a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn btn-sm">
-                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-chat fs-4"></i>
                         </a>
                     </div>
                     <div class="post-likes">
