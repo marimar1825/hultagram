@@ -154,7 +154,7 @@ def like_post(post_id):
         next_page = url_for('index')
     return redirect(next_page)
 
-# BONUS: Routes for commenting
+# Routes for commenting
 @app.route('/comment/<int:post_id>', methods=['POST'])
 def add_comment(post_id):
     post = Post.query.get_or_404(post_id)
