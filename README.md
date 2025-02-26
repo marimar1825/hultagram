@@ -20,7 +20,7 @@
    cd hultagram
    ```
 
-2. **Create and activate a virtual environment (optional but recommended)**
+2. **If working locally: Create and activate a virtual environment (optional but recommended)**
    ```sh
    python -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
